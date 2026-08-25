@@ -1,236 +1,1539 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قوانين سيرفر الكاتوقوري | Katokuri</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="theme-color" content="#090412">
+    <meta name="description"
+        content="القوانين الرسمية لسيرفر KY (الكاتوقوري - Katokuri). دليلك الشامل لقوانين المجتمع ونظام العقوبات والباند الفوري.">
+    <meta name="keywords" content="KY, Katokuri, الكاتوقوري, ديسكورد, قوانين سيرفر, سيرفر ديسكورد, Discord Rules">
+    <title>قوانين سيرفر KY | الكاتوقوري - Katokuri</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Tajawal:wght@300;400;500;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- RemixIcon CDN for high quality vector icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+
     <style>
         :root {
-            --bg-dark: #0f051d;
-            --primary: #ffffff; 
-            --accent: #8a4fff;
-            --danger: #ff4d6d;
-            --warning: #ffcc00;
-            --glass: rgba(255, 255, 255, 0.07);
+            --bg-dark: #07030d;
+            --bg-card: rgba(18, 9, 36, 0.65);
+            --bg-card-hover: rgba(28, 14, 54, 0.85);
+            --border-color: rgba(168, 85, 247, 0.18);
+            --border-glow: rgba(168, 85, 247, 0.45);
+
+            --primary: #ffffff;
+            --text-muted: #a39cb5;
+            --accent: #8b5cf6;
+            --accent-light: #c084fc;
+            --accent-gradient: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
+            --accent-glow: rgba(139, 92, 246, 0.35);
+
+            --warning: #f59e0b;
+            --warning-bg: rgba(245, 158, 11, 0.1);
+            --warning-border: rgba(245, 158, 11, 0.3);
+            --warning-glow: rgba(245, 158, 11, 0.25);
+
+            --danger: #ef4444;
+            --danger-bg: rgba(239, 68, 68, 0.1);
+            --danger-border: rgba(239, 68, 68, 0.3);
+            --danger-glow: rgba(239, 68, 68, 0.25);
+
+            --success: #10b981;
+            --success-glow: rgba(16, 185, 129, 0.3);
+
+            --glass-blur: blur(14px);
+            --radius-sm: 10px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* إخفاء الماوس الأصلي */
-        * {
-            cursor: none !important;
+        /* Base & Reset */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Tajawal', sans-serif;
-            margin: 0;
+            font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background-color: var(--bg-dark);
-            background: radial-gradient(circle at center, #2a114b 0%, #0f051d 100%);
-            color: white;
-            display: flex;
-            justify-content: center;
+            color: var(--primary);
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
+            line-height: 1.6;
         }
 
-        /* دائرة الإضاءة - الحجم 120px - بدون إطار */
-        #mouse-glow {
+        /* Responsive Container */
+        .page-wrapper {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 24px 16px 60px 16px;
+        }
+
+        @media (min-width: 768px) {
+            .page-wrapper {
+                padding: 40px 24px 80px 24px;
+            }
+        }
+
+        /* Background Visuals & Cyber Gradients */
+        .ambient-bg {
             position: fixed;
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle, rgba(138, 79, 255, 0.7) 0%, rgba(138, 79, 255, 0) 70%);
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .ambient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.4;
+            animation: orbFloat 14s infinite alternate ease-in-out;
+        }
+
+        .orb-1 {
+            width: 350px;
+            height: 350px;
+            top: -100px;
+            right: -80px;
+            background: radial-gradient(circle, #7c3aed 0%, rgba(124, 58, 237, 0) 70%);
+        }
+
+        .orb-2 {
+            width: 450px;
+            height: 450px;
+            bottom: 5%;
+            left: -120px;
+            background: radial-gradient(circle, #4f46e5 0%, rgba(79, 70, 229, 0) 70%);
+            animation-duration: 18s;
+            animation-direction: alternate-reverse;
+        }
+
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            top: 45%;
+            right: 20%;
+            background: radial-gradient(circle, #a855f7 0%, rgba(168, 85, 247, 0) 70%);
+            opacity: 0.25;
+            animation-duration: 22s;
+        }
+
+        .cyber-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(ellipse at 50% 30%, black 40%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 40%, transparent 80%);
+        }
+
+        @keyframes orbFloat {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(40px, 30px) scale(1.1);
+            }
+
+            100% {
+                transform: translate(-30px, 50px) scale(0.95);
+            }
+        }
+
+        /* Mouse Glow (Desktop Only) */
+        #desktop-glow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(139, 92, 246, 0.05) 45%, transparent 70%);
             border-radius: 50%;
             pointer-events: none;
             transform: translate(-50%, -50%);
-            z-index: 9999;
-            transition: width 0.2s, height 0.2s, background 0.2s;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.3s ease, width 0.2s ease, height 0.2s ease;
         }
 
-        .container {
-            width: 90%;
-            max-width: 800px;
-            padding: 50px 0;
+        @media (pointer: fine) {
+            #desktop-glow {
+                opacity: 1;
+            }
         }
 
+        /* Header Section */
         header {
             text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .logo {
-            width: 150px;
-            height: 150px;
-            border-radius: 25px;
-            border: 3px solid var(--primary);
-            box-shadow: 0 0 25px rgba(138, 79, 255, 0.4);
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 900;
-            text-shadow: 0 0 15px rgba(138, 79, 255, 0.8);
-            margin: 10px 0;
-            text-decoration: underline;
-            text-underline-offset: 8px;
-        }
-
-        .server-link {
-            text-decoration: none;
-            color: var(--accent);
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .card {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        h2 {
-            font-size: 1.6rem;
-            color: var(--primary);
-            border-bottom: 2px solid var(--primary);
-            padding-bottom: 10px;
-            margin-bottom: 25px;
-        }
-
-        .rule-item {
-            background: rgba(0, 0, 0, 0.3);
-            margin-bottom: 12px;
-            padding: 18px;
-            border-radius: 12px;
-            border-right: 4px solid var(--primary);
-            display: flex;
-            align-items: center;
-            transition: 0.3s;
-        }
-
-        .rule-item:hover {
-            transform: translateX(-10px);
-            background: rgba(255, 255, 255, 0.1);
-            text-decoration: underline;
-        }
-
-        .rule-number {
-            color: var(--accent);
-            font-weight: bold;
-            margin-left: 15px;
-        }
-
-        .punish { border-right-color: var(--warning); }
-        .ban-instant { border-right-color: var(--danger); }
-
-        /* تنسيق قسم المطور ZEED */
-        .dev-section {
+            margin-bottom: 32px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+        }
+
+        .logo-container {
+            position: relative;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .logo-glow-ring {
+            position: absolute;
+            inset: -4px;
+            border-radius: 28px;
+            background: var(--accent-gradient);
+            filter: blur(12px);
+            opacity: 0.65;
+            transition: var(--transition);
+            animation: pulseGlow 4s infinite alternate ease-in-out;
+        }
+
+        .logo-container:hover .logo-glow-ring {
+            opacity: 0.95;
+            filter: blur(18px);
+        }
+
+        .logo {
+            position: relative;
+            width: clamp(105px, 25vw, 140px);
+            height: clamp(105px, 25vw, 140px);
+            object-fit: cover;
+            border-radius: 24px;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            background: #000000;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+            display: block;
+            transition: var(--transition);
+        }
+
+        .logo-container:hover .logo {
+            transform: scale(1.03);
+            border-color: var(--accent-light);
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                opacity: 0.5;
+                transform: scale(0.98);
+            }
+
+            100% {
+                opacity: 0.85;
+                transform: scale(1.03);
+            }
+        }
+
+        .server-status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: rgba(139, 92, 246, 0.12);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: #d8b4fe;
+            margin-bottom: 12px;
+            backdrop-filter: blur(8px);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--success);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--success);
+            animation: blink 2s infinite ease-in-out;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.4;
+                transform: scale(0.85);
+            }
+        }
+
+        h1.main-title {
+            font-size: clamp(1.75rem, 5.5vw, 2.6rem);
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+            margin: 4px 0 8px 0;
+            line-height: 1.25;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             gap: 10px;
-            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .brand-badge {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            display: inline-block;
+            filter: drop-shadow(0 2px 10px rgba(168, 85, 247, 0.4));
+        }
+
+        .subtitle {
+            font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+            color: var(--text-muted);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .server-tag {
+            color: #ffffff;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 3px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Top Actions / Discord CTA Button */
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            max-width: 480px;
+            flex-wrap: wrap;
+            margin-top: 6px;
+        }
+
+        .btn-discord {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 280px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #5865f2 0%, #4752c4 100%);
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            box-shadow: 0 8px 25px rgba(88, 101, 242, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        .btn-discord:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(88, 101, 242, 0.55);
+            background: linear-gradient(135deg, #6774ff 0%, #515edf 100%);
+        }
+
+        .btn-discord:active {
+            transform: scale(0.98);
+        }
+
+        .btn-discord i {
+            font-size: 1.25rem;
+        }
+
+        /* Stats & Highlights Row */
+        .highlights-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            width: 100%;
+            margin: 24px 0 28px 0;
+        }
+
+        .highlight-chip {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            padding: 10px 8px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            backdrop-filter: var(--glass-blur);
+            transition: var(--transition);
+        }
+
+        .highlight-chip strong {
+            display: block;
+            color: #ffffff;
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+        }
+
+        .highlight-chip i {
+            color: var(--accent-light);
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+            display: inline-block;
+        }
+
+        /* Controls Section: Search & Category Filter */
+        .controls-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 14px;
+            margin-bottom: 24px;
+            backdrop-filter: var(--glass-blur);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        .search-box {
+            position: relative;
+            width: 100%;
+            margin-bottom: 12px;
+        }
+
+        .search-box i.search-icon {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 42px 12px 16px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-sm);
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-light);
+            background: rgba(0, 0, 0, 0.6);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.25);
+        }
+
+        .search-input:focus+i.search-icon {
+            color: var(--accent-light);
+        }
+
+        .clear-search-btn {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: none;
+            padding: 4px;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .clear-search-btn:hover {
+            color: #ffffff;
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .filter-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            padding: 8px 16px;
+            color: var(--text-muted);
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .tab-btn.active {
+            background: var(--accent-gradient);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.35);
+        }
+
+        .tab-badge {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1px 7px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Cards Layout */
+        .section-card {
+            background: var(--bg-card);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: clamp(18px, 4vw, 32px);
+            margin-bottom: 24px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--card-accent-bar, var(--accent-gradient));
+            opacity: 0.8;
+        }
+
+        .section-card.warning-card {
+            --card-accent-bar: linear-gradient(90deg, #f59e0b, #fbbf24);
+            border-color: var(--warning-border);
+        }
+
+        .section-card.danger-card {
+            --card-accent-bar: linear-gradient(90deg, #ef4444, #f87171);
+            border-color: var(--danger-border);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            flex-wrap: wrap;
+        }
+
+        .card-title {
+            font-size: clamp(1.2rem, 3.5vw, 1.55rem);
+            font-weight: 800;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title i {
+            color: var(--accent-light);
+            font-size: 1.35rem;
+        }
+
+        .warning-card .card-title i {
+            color: var(--warning);
+        }
+
+        .danger-card .card-title i {
+            color: var(--danger);
+        }
+
+        .card-subtitle-badge {
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-muted);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        /* Rules List & Items */
+        .rules-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .rule-item {
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-md);
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        @media (min-width: 768px) {
+            .rule-item:hover {
+                background: var(--bg-card-hover);
+                border-color: var(--border-glow);
+                transform: translateX(-4px);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        .rule-item:active {
+            transform: scale(0.99);
+        }
+
+        .rule-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .rule-badge-num {
+            width: 34px;
+            height: 34px;
+            min-width: 34px;
+            border-radius: 10px;
+            background: rgba(139, 92, 246, 0.18);
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            color: var(--accent-light);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 12px rgba(139, 92, 246, 0.2);
+            flex-shrink: 0;
+        }
+
+        .rule-badge-punish {
+            background: var(--warning-bg);
+            border-color: var(--warning-border);
+            color: var(--warning);
+            box-shadow: 0 0 12px var(--warning-glow);
+        }
+
+        .rule-badge-ban {
+            background: var(--danger-bg);
+            border-color: var(--danger-border);
+            color: var(--danger);
+            box-shadow: 0 0 12px var(--danger-glow);
+        }
+
+        .rule-text {
+            font-size: clamp(0.95rem, 2.8vw, 1.05rem);
+            font-weight: 500;
+            color: #f3f0f7;
+            word-break: break-word;
+            line-height: 1.5;
+        }
+
+        .rule-actions {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .btn-copy-rule {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-muted);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .btn-copy-rule:hover {
+            background: rgba(168, 85, 247, 0.2);
+            color: #ffffff;
+            border-color: var(--accent-light);
+        }
+
+        .btn-copy-rule:active {
+            transform: scale(0.9);
+        }
+
+        /* Specific Item Accents */
+        .rule-item.punish-item {
+            border-right: 4px solid var(--warning);
+        }
+
+        .rule-item.ban-item {
+            border-right: 4px solid var(--danger);
+        }
+
+        .rule-item.general-item {
+            border-right: 4px solid var(--accent);
+        }
+
+        /* No Results State */
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            display: none;
+        }
+
+        .no-results i {
+            font-size: 2.5rem;
+            color: var(--accent-light);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Agreement / Acceptance Interactive Box */
+        .agreement-card {
+            background: linear-gradient(135deg, rgba(24, 12, 46, 0.9) 0%, rgba(12, 6, 26, 0.95) 100%);
+            border: 1px solid rgba(168, 85, 247, 0.35);
+            border-radius: var(--radius-lg);
+            padding: 24px 20px;
+            text-align: center;
+            margin-bottom: 32px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .agreement-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .agreement-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 18px;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .agreement-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 12px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
+
+        .agreement-btn:hover {
+            background: var(--accent-gradient);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+            transform: scale(1.02);
+        }
+
+        .agreement-btn.agreed {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 20px var(--success-glow);
+        }
+
+        /* Footer & Developer Section */
+        footer {
+            text-align: center;
+            padding: 30px 16px 10px 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .footer-copy {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .dev-badge-card {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-md);
+            padding: 12px 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(8px);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .dev-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
         }
 
         .dev-link {
             color: #ffffff;
             text-decoration: none;
-            font-weight: bold;
-            padding: 10px 25px;
-            background: rgba(138, 79, 255, 0.2);
-            border: 2px solid var(--accent);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            padding: 6px 18px;
+            background: rgba(139, 92, 246, 0.2);
+            border: 1.5px solid var(--accent);
             border-radius: 50px;
-            transition: 0.3s;
-            text-shadow: 0 0 10px var(--accent);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            box-shadow: 0 0 12px rgba(139, 92, 246, 0.3);
         }
 
         .dev-link:hover {
             background: var(--accent);
-            box-shadow: 0 0 20px var(--accent);
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.8);
             transform: scale(1.05);
+            color: #ffffff;
         }
 
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        .dev-link:active {
+            transform: scale(0.98);
+        }
+
+        /* Toast Notification */
+        .toast-notification {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(18, 9, 36, 0.95);
+            border: 1px solid var(--accent-light);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(168, 85, 247, 0.35);
+            backdrop-filter: blur(12px);
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+        }
+
+        .toast-notification.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        .toast-notification i {
+            color: var(--success);
+            font-size: 1.1rem;
+        }
+
+        /* Floating Scroll-to-Top Button */
+        .btn-scroll-top {
+            position: fixed;
+            bottom: 24px;
+            left: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            color: #ffffff;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 999;
+            backdrop-filter: var(--glass-blur);
+            opacity: 0;
+            transform: scale(0.8);
+            pointer-events: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-scroll-top.visible {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+
+        .btn-scroll-top:hover {
+            background: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+            transform: scale(1.1);
+        }
+
+        /* Subtle Animation Keyframes for Elements */
+        .fade-in-up {
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
+
 <body>
 
-    <div id="mouse-glow"></div>
-
-    <div class="container">
-        <header>
-            <img src="KY.png" alt="Katokuri Logo" class="logo">
-            <h1>قوانين سيرفر KY</h1>
-            <a href="https://discord.gg/NJZVsPQUSW" target="_blank" class="server-link">
-                الكاتوقوري | Katokuri
-            </a>
-        </header>
-
-        <section class="card">
-            <h2>📜 قوانين  الكاتوقوري | Katokuri</h2>
-            <div class="rule-item"><span class="rule-number">1</span> 🚫 ممنوع السب والشتم بجميع أنواعه.</div>
-            <div class="rule-item"><span class="rule-number">2</span> 🧑‍⚖️ يجب احترام الإدارة وجميع أعضاء السيرفر.</div>
-            <div class="rule-item"><span class="rule-number">3</span> 🔗 يُمنع نشر أي روابط مشبوهة أو غير موثوقة.</div>
-            <div class="rule-item"><span class="rule-number">4</span> 🎖️ لا يُسمح بطلب الرتب دون تقديم أو اجتهاد.</div>
-            <div class="rule-item"><span class="rule-number">5</span> 🔞 يُمنع نشر أي محتوى غير لائق أو مخلّ.</div>
-            <div class="rule-item"><span class="rule-number">6</span> 🛑 النقاشات السياسية أو الدينية الحادّة ممنوعة تمامًا.</div>
-            <div class="rule-item"><span class="rule-number">7</span> ⚠️ يجب الالتزام بجميع القوانين والتعليمات.</div>
-            <div class="rule-item"><span class="rule-number">8</span> ❌ يُمنع الحلف والقَسَم داخل السيرفر.</div>
-            <div class="rule-item"><span class="rule-number">9</span> 🎤 يُمنع الغناء في السيرفر إلا للاونر ونائبه.</div>
-        </section>
-
-        <section class="card">
-            <h2 style="color: var(--warning);">⚠️ نظام العقوبات</h2>
-            <div class="rule-item punish"> ميوت مؤقت (مخالفة أولى)</div>
-            <div class="rule-item punish"> طرد مؤقت (مخالفة ثانية)</div>
-            <div class="rule-item punish"> باند دائم في حال التكرار</div>
-        </section>
-
-        <section class="card">
-            <h2 style="color: var(--danger);">🚫 الباند الفوري</h2>
-            <div class="rule-item ban-instant">🔥 إشعال الفتن والمشاكل بين الأعضاء</div>
-            <div class="rule-item ban-instant">🎭 انتحال رتبة إدارية أو اسم مسؤول</div>
-            <div class="rule-item ban-instant">📢 الترويج لسيرفرات أخرى ديسكورد</div>
-        </section>
-
-        <footer>
-            <p>جميع الحقوق محفوظة لسيرفر الكاتوقوري &copy; 2026</p>
-            <div class="dev-section">
-                <span>برمجة وتصميم بواسطة:</span>
-                <a href="https://guns.lol/zeed_dev" target="_blank" class="dev-link">ZEED</a>
-            </div>
-        </footer>
+    <!-- Ambient Glowing Orbs and Cyber Grid Background -->
+    <div class="ambient-bg" aria-hidden="true">
+        <div class="ambient-orb orb-1"></div>
+        <div class="ambient-orb orb-2"></div>
+        <div class="ambient-orb orb-3"></div>
+        <div class="cyber-grid"></div>
     </div>
 
+    <!-- Desktop Mouse Glow (Activated on fine pointers only) -->
+    <div id="desktop-glow" aria-hidden="true"></div>
+
+    <div class="page-wrapper">
+
+        <!-- Header Section -->
+        <header class="fade-in-up">
+            <div class="logo-container" onclick="scrollToTop()" title="سيرفر KY">
+                <div class="logo-glow-ring"></div>
+                <img src="IMG_2895.png" alt="شعار سيرفر KY - الكاتوقوري" class="logo" width="140" height="140">
+            </div>
+
+            <div class="server-status-badge">
+                <span class="status-dot"></span>
+                <span>السيرفر الرسمي متاح للأعضاء</span>
+            </div>
+
+            <h1 class="main-title">
+                قوانين سيرفر <span class="brand-badge">KY</span>
+            </h1>
+
+            <div class="subtitle">
+                <span>سيرفر</span>
+                <span class="server-tag">الكاتوقوري | Katokuri</span>
+            </div>
+
+            <div class="hero-actions">
+                <a href="https://discord.gg/SkTDumKRyP" target="_blank" rel="noopener noreferrer" class="btn-discord"
+                    id="discord-main-btn">
+                    <i class="ri-discord-fill"></i>
+                    <span>انضم إلى ديسكورد السيرفر</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- Highlights Row -->
+        <div class="highlights-row fade-in-up" style="animation-delay: 0.1s;">
+            <div class="highlight-chip">
+                <i class="ri-shield-check-line"></i>
+                <strong>مجتمع محترم</strong>
+                <span>بيئة آمنة للجميع</span>
+            </div>
+            <div class="highlight-chip">
+                <i class="ri-scales-3-line"></i>
+                <strong>عدالة تامة</strong>
+                <span>تطبيق حازم للوائح</span>
+            </div>
+            <div class="highlight-chip">
+                <i class="ri-user-star-line"></i>
+                <strong>إدارة متفاعلة</strong>
+                <span>دعم وحماية مستمرة</span>
+            </div>
+        </div>
+
+        <!-- Search & Filter Controls -->
+        <div class="controls-panel fade-in-up" style="animation-delay: 0.15s;">
+            <div class="search-box">
+                <input type="text" id="rule-search" class="search-input"
+                    placeholder="ابحث في نصوص القوانين أو العقوبات..." autocomplete="off">
+                <i class="ri-search-line search-icon"></i>
+                <button type="button" class="clear-search-btn" id="clear-search" aria-label="مسح البحث">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+
+            <div class="filter-tabs" role="tablist">
+                <button type="button" class="tab-btn active" data-filter="all">
+                    <i class="ri-apps-2-line"></i>
+                    <span>جميع القوانين</span>
+                    <span class="tab-badge" id="count-all">15</span>
+                </button>
+                <button type="button" class="tab-btn" data-filter="general">
+                    <i class="ri-file-list-3-line"></i>
+                    <span>القوانين العامة</span>
+                    <span class="tab-badge">9</span>
+                </button>
+                <button type="button" class="tab-btn" data-filter="punish">
+                    <i class="ri-error-warning-line"></i>
+                    <span>نظام العقوبات</span>
+                    <span class="tab-badge">3</span>
+                </button>
+                <button type="button" class="tab-btn" data-filter="ban">
+                    <i class="ri-forbid-2-line"></i>
+                    <span>الباند الفوري</span>
+                    <span class="tab-badge">3</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- No Results Fallback -->
+        <div class="no-results" id="no-results-msg">
+            <i class="ri-file-search-line"></i>
+            <h3>لم يتم العثور على أي قانون يطابق بحثك</h3>
+            <p>جرّب البحث بكلمات أخرى أو اختر تبويب "جميع القوانين"</p>
+        </div>
+
+        <!-- Section 1: General Server Rules -->
+        <section class="section-card general-card fade-in-up" data-category="general" style="animation-delay: 0.2s;">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <i class="ri-book-open-line"></i>
+                    <span>📜 قوانين الكاتوقوري | Katokuri</span>
+                </h2>
+                <span class="card-subtitle-badge">9 بنود أساسية</span>
+            </div>
+
+            <div class="rules-list">
+                <div class="rule-item general-item" data-rule-text="ممنوع السب والشتم بجميع أنواعه">
+                    <div class="rule-left">
+                        <span class="rule-badge-num">1</span>
+                        <span class="rule-text">🚫 ممنوع السب والشتم بجميع أنواعه.</span>
+                    </div>
+                    <div class="rule-actions">
+                        <button class="btn-copy-rule" title="نسخ القانون"
+                            onclick="copyRuleText('🚫 ممنوع السب والشتم بجميع أنواعه.')" aria-label="نسخ القانون 1">
+                            <i class="ri-file-copy-line"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="rule-item general-item" data-rule-text="يجب احترام الإدارة وجميع أعضاء السيرفر">
+                    <div class="rule-left">
+                        <span class="rule-badge-num">2</span>
+                        <span class="rule-text">🧑‍⚖️ يجب احترام الإدارة وجميع أعضاء السيرفر.</span>
+                    </div>
+                    <div class="rule-actions">
+                        <button class="btn-copy-rule" title="نسخ القانون"
+                            onclick="copyRuleText('🧑‍⚖️ يجب احترام الإدارة وجميع أعصفاء السيرفر.')"
+                            aria-label="نسخ القانون 2">
+                            <i class="ri-file-copy-line"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="rule-item general-item" data-rule-text="يُمنع نشر أي روابط مشبوهة أو غير موثوقة">
+                    <div class="rule-left">
+                        <span class="rule-badge-num">3</span>
+                        <span class="rule-text">🔗 يُمنع نشر أي روابط مشبوهة أو غير موثوقة.</span>
+                    </div>
+                    <div class="rule-actions">
+                        <button class="btn-copy-rule" title="نسخ القانون"
+                            onclick="copyRuleText('🔗 يُمنع نشر أي روابط مشبوهة أو غير موثوقة.')"
+                            aria-label="نسخ القانون 3">
+                            <i class="ri-file-copy-line"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="rule-item general-item" data-rule-text="لا يُسمح بطلب الرتب دون تقديم أو اجتهاد">
+                    <div class="rule-left">
+                        <span class="rule-badge-num">4</span>
+                        <span class="rule-text">🎖️ لا يُسمح بطلب الرتب دون تقديم أو اجتهاد.</span>
+                    </div>
+                    <div class="rule-actions">
+                        <button class="btn-copy-rule" title="نسخ القانون"
+                            onclick="copyRuleText('🎖️ لا يُسمح بطلب الرتب دون تقديم أو اجتهاد.')"
+                            aria-label="نسخ القانون 4">
+                            <i class="ri-file-copy-line"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="rule-item general-item" data-rule-text="يُمنع نشر أي محتوى غير لائق أو مخلّ">
+                    <div class="rule-left">
+                        <span class="rule-badge-num">5</span>
+                        <span class="rule-text">🔞 يُمنع نشر أي محتوى غير لائق أو مخلّ.</span>
+                    </div>
+                    <div class="rule-actions">
+                        <button class="btn-copy-rule" title="نسخ القانون"
+                            onclick="copyRuleText('🔞 يُمنع نشر أي محتوى غير لائق أو مخلّ.')"
+                            aria-label="نسخ القانون 5">
+                            <i class="ri-file-copy-line"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="rule-item general-item" data-rule-text="النقاشات السياسية أو الدينية الحادّة ممنوعة تمامًا">
+                    <div class="rule-left">
+                        <span class="rule-badge-num">6</span>
+                        <span class="rule-text">🛑 النقاشات السياسية أو الدينية الحادّة ممنوعة تمامًا.</span>
+                    </div>
+                    <div class="rule-actions">
+                        <button class="btn-copy-rule" title="نسخ القانون"
+                            onclick="copyRuleText('🛑 النقاشات السياسية أو الدينية الحادّة ممنوعة تمامًا.')"
+                            aria-label="نسخ القانون 6">
+                            <i class="ri-file-copy-line"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="rule-item general-item" data-rule-text="يجب الالتزام بجميع القوانين والتعليمات">
+                    <div class="rule-left">
+                        <span class="rule-badge-num">7</span>
+                        <span class="rule-text">⚠️ يجب الالتزام بجميع القوانين والتعليمات.</span>
+                    </div>
+                    <div class="rule-actions">
+                        <button class="btn-copy-rule" title="نسخ القانون"
+                            onclick="copyRuleText('⚠️ يجب الالتزام بجميع القوانين والتعليمات.')"
+                            aria-label="نسخ القانون 7">
+                            <i class="ri-file-copy-line"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="rule-item general-item" data-rule-text="يُمنع الحلف والقَسَم داخل السيرفر">
+                    <div class="rule-left">
+                        <span class="rule-badge-num">8</span>
+                        <span class="rule-text">❌ يُمنع الحلف والقَسَم داخل السيرفر.</span>
+                    </div>
+                    <div class="rule-actions">
+                        <button class="btn-copy-rule" title="نسخ القانون"
+                            onclick="copyRuleText('❌ يُمنع الحلف والقَسَم داخل السيرفر.')" aria-label="نسخ القانون 8">
+                            <i class="ri-file-copy-line"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="rule-item general-item" data-rule-text="يُمنع الغناء في السيرفر إلا للاونر ونائبه">
+                    <div class="rule-left">
+                        <span class="rule-badge-num">9</span>
+                        <span class="rule-text">🎤 يُمنع الغناء في السيرفر إلا للاونر ونائبه.</span>
+                    </div>
+                    <div class="rule-actions">
+                        <button class="btn-copy-rule" title="نسخ القانون"
+                            onclick="copyRuleText('🎤 يُمنع الغناء في السيرفر إلا للاونر ونائبه.')"
+                            aria-label="نسخ القانون 9">
+                            <i class="ri-file-copy-line"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Punishment System -->
+        <section class="section-card warning-card fade-in-up" data-category="punish" style="animation-delay: 0.25s;">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <i class="ri-alarm-warning-line"></i>
+                    <span>⚠️ نظام العقوبات</span>
+                </h2>
+                <span class="card-subtitle-badge">تدرج العقوبة</span>
+            </div>
+
+            <div class="rules-list">
+                <div class="rule-item punish-item" data-rule-text="ميوت مؤقت (مخالفة أولى)">
+                    <div class="rule-left">
+                        <span class="rule-badge-num rule-badge-punish"><i class="ri-volume-mute-line"></i></span>
+                        <span class="rule-text">🔇 ميوت مؤقت (مخالفة أولى)</span>
+                    </div>
+                    <div class="rule-actions">
+                        <button class="btn-copy-rule" title="نسخ البند"
+                            onclick="copyRuleText('ميوت مؤقت (مخالفة أولى)')" aria-label="نسخ عقوبة 1">
+                            <i class="ri-file-copy-line"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="rule-item punish-item" data-rule-text="طرد مؤقت (مخالفة ثانية)">
+                    <div class="rule-left">
+                        <span class="rule-badge-num rule-badge-punish"><i class="ri-user-unfollow-line"></i></span>
+                        <span class="rule-text">🚪 طرد مؤقت (مخالفة ثانية)</span>
+                    </div>
+                    <div class="rule-actions">
+                        <button class="btn-copy-rule" title="نسخ البند"
+                            onclick="copyRuleText('طرد مؤقت (مخالفة ثانية)')" aria-label="نسخ عقوبة 2">
+                            <i class="ri-file-copy-line"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="rule-item punish-item" data-rule-text="باند دائم في حال التكرار">
+                    <div class="rule-left">
+                        <span class="rule-badge-num rule-badge-punish"><i
+                                class="ri-indeterminate-circle-line"></i></span>
+                        <span class="rule-text">⛔ باند دائم في حال التكرار</span>
+                    </div>
+                    <div class="rule-actions">
+                        <button class="btn-copy-rule" title="نسخ البند"
+                            onclick="copyRuleText('باند دائم في حال التكرار')" aria-label="نسخ عقوبة 3">
+                            <i class="ri-file-copy-line"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Instant Ban Rules -->
+        <section class="section-card danger-card fade-in-up" data-category="ban" style="animation-delay: 0.3s;">
+            <div class="card-header">
+                <h2 class="card-title">
+                    <i class="ri-shield-cross-line"></i>
+                    <span>🚫 الباند الفوري</span>
+                </h2>
+                <span class="card-subtitle-badge">عقوبة فورية بدون إنذار</span>
+            </div>
+
+            <div class="rules-list">
+                <div class="rule-item ban-item" data-rule-text="إشعال الفتن والمشاكل بين الأعضاء">
+                    <div class="rule-left">
+                        <span class="rule-badge-num rule-badge-ban"><i class="ri-fire-line"></i></span>
+                        <span class="rule-text">🔥 إشعال الفتن والمشاكل بين الأعضاء</span>
+                    </div>
+                    <div class="rule-actions">
+                        <button class="btn-copy-rule" title="نسخ البند"
+                            onclick="copyRuleText('إشعال الفتن والمشاكل بين الأعضاء')" aria-label="نسخ باند 1">
+                            <i class="ri-file-copy-line"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="rule-item ban-item" data-rule-text="انتحال رتبة إدارية أو اسم مسؤول">
+                    <div class="rule-left">
+                        <span class="rule-badge-num rule-badge-ban"><i class="ri-spy-line"></i></span>
+                        <span class="rule-text">🎭 انتحال رتبة إدارية أو اسم مسؤول</span>
+                    </div>
+                    <div class="rule-actions">
+                        <button class="btn-copy-rule" title="نسخ البند"
+                            onclick="copyRuleText('انتحال رتبة إدارية أو اسم مسؤول')" aria-label="نسخ باند 2">
+                            <i class="ri-file-copy-line"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="rule-item ban-item" data-rule-text="الترويج لسيرفرات أخرى ديسكورد">
+                    <div class="rule-left">
+                        <span class="rule-badge-num rule-badge-ban"><i class="ri-megaphone-line"></i></span>
+                        <span class="rule-text">📢 الترويج لسيرفرات أخرى ديسكورد</span>
+                    </div>
+                    <div class="rule-actions">
+                        <button class="btn-copy-rule" title="نسخ البند"
+                            onclick="copyRuleText('الترويج لسيرفرات أخرى ديسكورد')" aria-label="نسخ باند 3">
+                            <i class="ri-file-copy-line"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Agreement Box -->
+        <div class="agreement-card fade-in-up" style="animation-delay: 0.35s;">
+            <h3 class="agreement-title">✨ الالتزام بالقوانين مسؤولية الجميع</h3>
+            <p class="agreement-desc">دخولك وتفاعلك داخل السيرفر يعني موافقتك التامة على جميع القوانين المذكورة أعلاه.
+            </p>
+            <button type="button" class="agreement-btn" id="accept-rules-btn" onclick="toggleAgreement()">
+                <i class="ri-checkbox-circle-line" id="accept-icon"></i>
+                <span id="accept-text">أقر بأنني قرأت القوانين وألتزم بها</span>
+            </button>
+        </div>
+
+        <!-- Footer & Developer Credits -->
+        <footer>
+            <div class="footer-content">
+                <p class="footer-copy">جميع الحقوق محفوظة لسيرفر الكاتوقوري &copy; 2026</p>
+
+                <div class="dev-badge-card">
+                    <span class="dev-label">برمجة وتصميم بواسطة:</span>
+                    <a href="https://zeed.is-a.dev/" target="_blank" rel="noopener noreferrer" class="dev-link"
+                        title="تواصل مع المطور ZEED">
+                        <i class="ri-code-s-slash-line"></i>
+                        <span>ZEED</span>
+                    </a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button type="button" class="btn-scroll-top" id="scroll-top-btn" onclick="scrollToTop()" aria-label="الرجوع للأعلى">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+
+    <!-- Toast Notification Element -->
+    <div class="toast-notification" id="toast" role="alert" aria-live="polite">
+        <i class="ri-checkbox-circle-fill"></i>
+        <span id="toast-message">تم نسخ النص بنجاح!</span>
+    </div>
+
+    <!-- JavaScript Logic -->
     <script>
-        const glow = document.getElementById('mouse-glow');
-        
-        document.addEventListener('mousemove', (e) => {
-            glow.style.left = e.clientX + 'px';
-            glow.style.top = e.clientY + 'px';
+        // 1. Mouse Glow Effect (Only enabled for fine pointer / mouse devices)
+        const desktopGlow = document.getElementById('desktop-glow');
+        const hasPointer = window.matchMedia('(pointer: fine)').matches;
+
+        if (hasPointer && desktopGlow) {
+            let mouseX = window.innerWidth / 2;
+            let mouseY = window.innerHeight / 2;
+            let currentX = mouseX;
+            let currentY = mouseY;
+
+            window.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            }, { passive: true });
+
+            function animateGlow() {
+                currentX += (mouseX - currentX) * 0.15;
+                currentY += (mouseY - currentY) * 0.15;
+                desktopGlow.style.left = currentX + 'px';
+                desktopGlow.style.top = currentY + 'px';
+                requestAnimationFrame(animateGlow);
+            }
+            animateGlow();
+        }
+
+        // 2. Search & Filter Logic
+        const searchInput = document.getElementById('rule-search');
+        const clearSearchBtn = document.getElementById('clear-search');
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const sections = document.querySelectorAll('.section-card');
+        const noResultsMsg = document.getElementById('no-results-msg');
+
+        let currentCategory = 'all';
+
+        function filterRules() {
+            const query = searchInput.value.trim().toLowerCase();
+            let totalVisibleRules = 0;
+
+            if (query.length > 0) {
+                clearSearchBtn.style.display = 'block';
+            } else {
+                clearSearchBtn.style.display = 'none';
+            }
+
+            sections.forEach(section => {
+                const sectionCategory = section.getAttribute('data-category');
+                const matchesCategory = (currentCategory === 'all' || currentCategory === sectionCategory);
+
+                let visibleInCategory = 0;
+                const items = section.querySelectorAll('.rule-item');
+
+                items.forEach(item => {
+                    const ruleContent = (item.getAttribute('data-rule-text') || item.innerText).toLowerCase();
+                    const matchesSearch = query === '' || ruleContent.includes(query);
+
+                    if (matchesCategory && matchesSearch) {
+                        item.style.display = 'flex';
+                        visibleInCategory++;
+                        totalVisibleRules++;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                if (visibleInCategory > 0) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+
+            if (totalVisibleRules === 0) {
+                noResultsMsg.style.display = 'block';
+            } else {
+                noResultsMsg.style.display = 'none';
+            }
+        }
+
+        searchInput.addEventListener('input', filterRules);
+
+        clearSearchBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            filterRules();
+            searchInput.focus();
         });
 
-        // تأثير تفاعلي عند لمس العناصر
-        const interactables = document.querySelectorAll('a, .rule-item, .dev-link');
-        interactables.forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                glow.style.width = '140px';
-                glow.style.height = '140px';
-                glow.style.background = 'radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(138, 79, 255, 0) 70%)';
-            });
-            item.addEventListener('mouseleave', () => {
-                glow.style.width = '120px';
-                glow.style.height = '120px';
-                glow.style.background = 'radial-gradient(circle, rgba(138, 79, 255, 0.7) 0%, rgba(138, 79, 255, 0) 70%)';
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentCategory = btn.getAttribute('data-filter');
+                filterRules();
             });
         });
+
+        // 3. Copy Rule to Clipboard & Toast Notification
+        let toastTimeout;
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        function copyRuleText(text) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast('تم نسخ نص القانون بنجاح!');
+                }).catch(() => {
+                    fallbackCopy(text);
+                });
+            } else {
+                fallbackCopy(text);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showToast('تم نسخ نص القانون بنجاح!');
+            } catch (err) {
+                showToast('فشل النسخ التلقائي');
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // 4. Interactive Agreement Button
+        let isAgreed = false;
+        function toggleAgreement() {
+            const btn = document.getElementById('accept-rules-btn');
+            const icon = document.getElementById('accept-icon');
+            const text = document.getElementById('accept-text');
+
+            isAgreed = !isAgreed;
+
+            if (isAgreed) {
+                btn.classList.add('agreed');
+                icon.className = 'ri-checkbox-circle-fill';
+                text.textContent = 'تم تأكيد التزامك بالقوانين ✅';
+                showToast('شكرًا لالتزامك بقوانين سيرفر KY!');
+            } else {
+                btn.classList.remove('agreed');
+                icon.className = 'ri-checkbox-circle-line';
+                text.textContent = 'أقر بأنني قرأت القوانين وألتزم بها';
+            }
+        }
+
+        // 5. Scroll to Top Button & Visibility
+        const scrollTopBtn = document.getElementById('scroll-top-btn');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        }, { passive: true });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
     </script>
 </body>
+
 </html>
